@@ -118,7 +118,7 @@ jobs:
           path: testbed/tests/results/${{steps.filename.outputs.name}}.json
 
   update-benchmarks:
-    runs-on: blacksmith-4vcpu-ubuntu-2204
+    runs-on: blacksmith-2vcpu-ubuntu-2204
     needs: [loadtest]
     if: github.event_name != 'pull_request'
     steps:

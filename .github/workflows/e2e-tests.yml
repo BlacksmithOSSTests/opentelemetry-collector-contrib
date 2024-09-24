@@ -19,7 +19,7 @@ env:
   SEGMENT_DOWNLOAD_TIMEOUT_MINS: 2
 jobs:
   collector-build:
-    runs-on: blacksmith-4vcpu-ubuntu-2204
+    runs-on: blacksmith-2vcpu-ubuntu-2204
     if: ${{ github.actor != 'dependabot[bot]' }}
     steps:
       - name: Checkout
@@ -49,7 +49,7 @@ jobs:
           path: ./bin/*
 
   supervisor-test:
-    runs-on: blacksmith-4vcpu-ubuntu-2204
+    runs-on: blacksmith-2vcpu-ubuntu-2204
     needs: collector-build
     steps:
       - uses: actions/checkout@v4
@@ -81,7 +81,7 @@ jobs:
           go test -v --tags=e2e
 
   docker-build:
-    runs-on: blacksmith-4vcpu-ubuntu-2204
+    runs-on: blacksmith-2vcpu-ubuntu-2204
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -127,7 +127,7 @@ jobs:
           - processor/k8sattributesprocessor
           - receiver/kubeletstatsreceiver
           - receiver/k8sobjectsreceiver
-    runs-on: blacksmith-4vcpu-ubuntu-2204
+    runs-on: blacksmith-2vcpu-ubuntu-2204
     needs: docker-build
     steps:
       - uses: actions/checkout@v4
@@ -175,7 +175,7 @@ jobs:
 
   kubernetes-test:
     if: ${{ github.actor != 'dependabot[bot]' && always() }}
-    runs-on: blacksmith-4vcpu-ubuntu-2204
+    runs-on: blacksmith-2vcpu-ubuntu-2204
     needs: [kubernetes-test-matrix]
     steps:
       - name: Print result
